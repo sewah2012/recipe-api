@@ -1,0 +1,13 @@
+server:
+  servlet:
+    context-path: /api
+spring:
+  application:
+    name: recipe-service
+  datasource:
+    url: jdbc:h2:mem:recipe-db
+    username: root
+    password: password
+    driverClassName: org.h2.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
