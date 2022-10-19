@@ -12,6 +12,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/recipe")
+@CrossOrigin(origins = "*", maxAge = 3600)
 public class RecipeController {
     private final RecipeService recipeService;
 

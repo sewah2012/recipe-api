@@ -30,7 +30,7 @@ public class RecipeServiceImp implements RecipeService {
     public String updateRecipe(Recipe updatedRecipe) {
         var recipe = recipeRepository.findById(updatedRecipe.getId()).orElseThrow(()->new NoSuchResourceException("This recipe does not exist!"));
         recipe.setName(updatedRecipe.getName());
-        recipe.setIngredients(updatedRecipe.getIngredients());
+        recipe.getIngredients().addAll(updatedRecipe.getIngredients());
         recipe.setDescription(updatedRecipe.getDescription());
         recipe.setImageUrl(updatedRecipe.getImageUrl());
 
