@@ -21,7 +21,7 @@ public class Recipe {
     private String name;
     @Builder.Default
     @JoinColumn(name = "ingredient_id", referencedColumnName = "id")
-    @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST}, orphanRemoval = true)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Ingredient> ingredients = new ArrayList<>();
     private String imageUrl;
     private String description;
