@@ -29,6 +29,8 @@ public class RecipeServiceImp implements RecipeService {
     @Override
     public String updateRecipe(Recipe updatedRecipe) {
         var recipe = recipeRepository.findById(updatedRecipe.getId()).orElseThrow(()->new NoSuchResourceException("This recipe does not exist!"));
+        recipe.getIngredients().clear(); //emptys the ingredients list
+
         recipe.setName(updatedRecipe.getName());
         recipe.getIngredients().addAll(updatedRecipe.getIngredients());
         recipe.setDescription(updatedRecipe.getDescription());
