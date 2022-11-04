@@ -1,6 +1,8 @@
 package com.recipe.recipeapi.dto;
 
 import com.recipe.recipeapi.entities.Ingredient;
+import com.recipe.recipeapi.entities.RecipeOrigin;
+import com.recipe.recipeapi.entities.RecipeType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -18,4 +20,7 @@ public class CreateRecipeDto {
     private List<Ingredient> ingredients = new ArrayList<>();
     private String imageUrl;
     private String description;
+    private String instruction;
+    private RecipeOrigin recipeOrigin;
+    private com.recipe.recipeapi.entities.RecipeType RecipeType;
 }

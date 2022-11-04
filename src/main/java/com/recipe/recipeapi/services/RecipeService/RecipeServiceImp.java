@@ -22,6 +22,9 @@ public class RecipeServiceImp implements RecipeService {
                         .description(recipeRequest.getDescription())
                         .imageUrl(recipeRequest.getImageUrl())
                         .ingredients(recipeRequest.getIngredients())
+                        .instruction(recipeRequest.getInstruction())
+                        .recipeType(recipeRequest.getRecipeType())
+                        .recipeOrigin(recipeRequest.getRecipeOrigin())
                 .build());
         return "Recipe successfully created!";
     }
@@ -35,6 +38,9 @@ public class RecipeServiceImp implements RecipeService {
         recipe.getIngredients().addAll(updatedRecipe.getIngredients());
         recipe.setDescription(updatedRecipe.getDescription());
         recipe.setImageUrl(updatedRecipe.getImageUrl());
+        recipe.setRecipeOrigin(updatedRecipe.getRecipeOrigin());
+        recipe.setRecipeType(updatedRecipe.getRecipeType());
+        recipe.setInstruction(updatedRecipe.getInstruction());
 
         recipeRepository.save(recipe);
         return "recipe successfully updated";
