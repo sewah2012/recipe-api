@@ -1,7 +1,10 @@
 package com.recipe.recipeapi.controllers;
 
 import com.recipe.recipeapi.dto.CreateRecipeDto;
+import com.recipe.recipeapi.dto.FilterObj;
 import com.recipe.recipeapi.entities.Recipe;
+import com.recipe.recipeapi.entities.RecipeOrigin;
+import com.recipe.recipeapi.entities.RecipeType;
 import com.recipe.recipeapi.services.RecipeService.RecipeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -17,12 +20,12 @@ public class RecipeController {
     private final RecipeService recipeService;
 
     @PostMapping("/create")
-    ResponseEntity<String> createRecipe(@RequestBody CreateRecipeDto request){
+    ResponseEntity<Recipe> createRecipe(@RequestBody CreateRecipeDto request){
         return ResponseEntity.ok(recipeService.createRecipe(request));
     }
 
     @PutMapping("/update")
-    ResponseEntity<String> updateRecipe(@RequestBody Recipe updatedRecipe){
+    ResponseEntity<Recipe> updateRecipe(@RequestBody Recipe updatedRecipe){
         return ResponseEntity.ok(recipeService.updateRecipe(updatedRecipe));
     }
 
@@ -32,8 +35,10 @@ public class RecipeController {
     }
 
     @GetMapping("/getAll")
-    ResponseEntity<List<Recipe>> getAllRecipe(){
-        return ResponseEntity.ok(recipeService.getAllRecipe());
+    ResponseEntity<List<Recipe>> getAllRecipe(
+        @RequestParam(name = "recipeType", defaultValue = "VEGETARIAN") RecipeType recipeType
+    ){
+        return ResponseEntity.ok(recipeService.getAllRecipe(recipeType));
     }
 
     @GetMapping("/getRecipe/{recipeId}")

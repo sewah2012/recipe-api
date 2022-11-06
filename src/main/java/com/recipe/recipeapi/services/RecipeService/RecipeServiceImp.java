@@ -1,7 +1,10 @@
 package com.recipe.recipeapi.services.RecipeService;
 
 import com.recipe.recipeapi.dto.CreateRecipeDto;
+import com.recipe.recipeapi.dto.FilterObj;
 import com.recipe.recipeapi.entities.Recipe;
+import com.recipe.recipeapi.entities.RecipeOrigin;
+import com.recipe.recipeapi.entities.RecipeType;
 import com.recipe.recipeapi.exceptions.errors.NoSuchResourceException;
 import com.recipe.recipeapi.repositories.RecipeRepository;
 import lombok.RequiredArgsConstructor;
@@ -16,8 +19,8 @@ public class RecipeServiceImp implements RecipeService {
 
 
     @Override
-    public String createRecipe(CreateRecipeDto recipeRequest) {
-        recipeRepository.save(Recipe.builder()
+    public Recipe createRecipe(CreateRecipeDto recipeRequest) {
+       return recipeRepository.save(Recipe.builder()
                         .name(recipeRequest.getName())
                         .description(recipeRequest.getDescription())
                         .imageUrl(recipeRequest.getImageUrl())
@@ -26,14 +29,12 @@ public class RecipeServiceImp implements RecipeService {
                         .recipeType(recipeRequest.getRecipeType())
                         .recipeOrigin(recipeRequest.getRecipeOrigin())
                 .build());
-        return "Recipe successfully created!";
     }
 
     @Override
-    public String updateRecipe(Recipe updatedRecipe) {
+    public Recipe updateRecipe(Recipe updatedRecipe) {
         var recipe = recipeRepository.findById(updatedRecipe.getId()).orElseThrow(()->new NoSuchResourceException("This recipe does not exist!"));
         recipe.getIngredients().clear(); //emptys the ingredients list
-
         recipe.setName(updatedRecipe.getName());
         recipe.getIngredients().addAll(updatedRecipe.getIngredients());
         recipe.setDescription(updatedRecipe.getDescription());
@@ -42,8 +43,7 @@ public class RecipeServiceImp implements RecipeService {
         recipe.setRecipeType(updatedRecipe.getRecipeType());
         recipe.setInstruction(updatedRecipe.getInstruction());
 
-        recipeRepository.save(recipe);
-        return "recipe successfully updated";
+       return  recipeRepository.save(recipe);
 
     }
 
@@ -60,7 +60,7 @@ public class RecipeServiceImp implements RecipeService {
     }
 
     @Override
-    public List<Recipe> getAllRecipe() {
-        return recipeRepository.findAll();
+    public List<Recipe> getAllRecipe(RecipeType recipeType) {
+       return recipeRepository.getRecipe(recipeType);
     }
 }
