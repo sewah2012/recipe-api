@@ -5,10 +5,23 @@ server:
 spring:
   application:
     name: recipe-service
+#  datasource:
+#    url: jdbc:h2:mem:recipe-db
+#    username: root
+#    password: password
+#    driverClassName: org.h2.Driver
   datasource:
-    url: jdbc:h2:mem:recipe-db
+    url: jdbc:postgresql://localhost:5432/recipe-db
     username: root
-    password: password
-    driverClassName: org.h2.Driver
-  jpa:
-    database-platform: org.hibernate.dialect.H2Dialect
+    password: root
+    driverClassName: org.postgresql.Driver
+    sql:
+      init:
+        platform: postgres
+    jpa:
+      database: POSTGRESQL
+      show-sql: true
+      hibernate:
+        ddl-auto: create-drop
+#  jpa:
+#    database-platform: org.hibernate.dialect.H2Dialect
