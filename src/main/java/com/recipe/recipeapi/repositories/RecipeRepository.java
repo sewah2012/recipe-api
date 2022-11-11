@@ -15,7 +15,7 @@ public interface RecipeRepository extends JpaRepository<Recipe, Long> {
 //    @Query("SELECT r FROM Recipe r where r.recipeType =:recipeType AND r.recipeOrigin IN :recipeOriginList")
 //    List<Recipe> getRecipe(@Param("recipeType") RecipeType recipeType, @Param("recipeOriginList") List<RecipeOrigin> recipeOriginList);
 //}
-    @Query("SELECT r FROM Recipe r where r.recipeType =:recipeType")
-    List<Recipe> getRecipe(@Param("recipeType") RecipeType recipeType);
+    @Query("SELECT r FROM Recipe r where r.recipeType =:recipeType AND r.recipeOrigin IN (:filters)")
+    List<Recipe> getRecipe(@Param("recipeType") RecipeType recipeType, @Param("filters") List<RecipeOrigin> filters);
 
 }

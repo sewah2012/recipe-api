@@ -36,9 +36,25 @@ public class RecipeController {
 
     @GetMapping("/getAll")
     ResponseEntity<List<Recipe>> getAllRecipe(
-        @RequestParam(name = "recipeType", defaultValue = "VEGETARIAN") RecipeType recipeType
+        @RequestParam(name = "recipeType", defaultValue = "VEGETARIAN", required = true) RecipeType recipeType,
+        @RequestParam(name="african", required = false, defaultValue = "true") Boolean africanOrigin,
+        @RequestParam(name="asian", required = false, defaultValue = "true") Boolean asianOrigin,
+        @RequestParam(name="european", required = false, defaultValue = "true") Boolean europeanOrigin,
+        @RequestParam(name="northAmerican", required = false, defaultValue = "true") Boolean northAmericanOrigin,
+        @RequestParam(name="southAmerican", required = false, defaultValue = "true") Boolean sourthAmericanOrigin,
+        @RequestParam(name="australian", required = false, defaultValue = "true") Boolean australianOrigin,
+        @RequestParam(name="antartica", required = false, defaultValue = "true") Boolean antarticaOrigin
     ){
-        return ResponseEntity.ok(recipeService.getAllRecipe(recipeType));
+        return ResponseEntity.ok(recipeService.getAllRecipe(
+                recipeType,
+                africanOrigin,
+                asianOrigin,
+                europeanOrigin,
+                northAmericanOrigin,
+                sourthAmericanOrigin,
+                australianOrigin,
+                antarticaOrigin
+        ));
     }
 
     @GetMapping("/getRecipe/{recipeId}")

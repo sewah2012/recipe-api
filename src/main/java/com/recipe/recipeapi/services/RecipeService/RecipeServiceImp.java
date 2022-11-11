@@ -1,21 +1,23 @@
 package com.recipe.recipeapi.services.RecipeService;
 
 import com.recipe.recipeapi.dto.CreateRecipeDto;
-import com.recipe.recipeapi.dto.FilterObj;
 import com.recipe.recipeapi.entities.Recipe;
 import com.recipe.recipeapi.entities.RecipeOrigin;
 import com.recipe.recipeapi.entities.RecipeType;
 import com.recipe.recipeapi.exceptions.errors.NoSuchResourceException;
 import com.recipe.recipeapi.repositories.RecipeRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
 public class RecipeServiceImp implements RecipeService {
     private final RecipeRepository recipeRepository;
+    private final JdbcTemplate jdbcTemplate;
 
 
     @Override
@@ -60,7 +62,26 @@ public class RecipeServiceImp implements RecipeService {
     }
 
     @Override
-    public List<Recipe> getAllRecipe(RecipeType recipeType) {
-       return recipeRepository.getRecipe(recipeType);
+    public List<Recipe> getAllRecipe(RecipeType recipeType,
+                                     Boolean africanOrigin,
+                                     Boolean asianOrigin,
+                                     Boolean europeanOrigin,
+                                     Boolean northAmericanOrigin,
+                                     Boolean sourthAmericanOrigin,
+                                     Boolean australianOrigin,
+                                     Boolean antarticaOrigin) {
+        List<RecipeOrigin> filters = new ArrayList<>();
+
+        if(africanOrigin) filters.add(RecipeOrigin.AFRICAN);
+        if(asianOrigin) filters.add(RecipeOrigin.ASIAN);
+        if(europeanOrigin) filters.add(RecipeOrigin.EUROPEAN);
+        if(northAmericanOrigin) filters.add(RecipeOrigin.NORTH_AMERICAN);
+        if(sourthAmericanOrigin) filters.add(RecipeOrigin.SOUTH_AMERICAN);
+        if(australianOrigin) filters.add(RecipeOrigin.AUSTRALIAN);
+        if(antarticaOrigin) filters.add(RecipeOrigin.ANTARTICA);
+
+
+
+        return recipeRepository.getRecipe(recipeType, filters);
     }
 }

@@ -13,5 +13,13 @@ public interface RecipeService {
     public Recipe updateRecipe(Recipe updatedRecipe);
     public String deleteRecipe(Long recipeId);
     public Recipe getRecipeById(Long recipeId);
-    public List<Recipe> getAllRecipe(RecipeType recipeType);
+
+    List<Recipe> getAllRecipe(RecipeType recipeType,
+                              Boolean africanOrigin,
+                              Boolean asianOrigin,
+                              Boolean europeanOrigin,
+                              Boolean northAmericanOrigin,
+                              Boolean sourthAmericanOrigin,
+                              Boolean australianOrigin,
+                              Boolean antarticaOrigin);
 }
