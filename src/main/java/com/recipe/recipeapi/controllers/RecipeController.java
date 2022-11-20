@@ -21,7 +21,7 @@ public class RecipeController {
 
     @PostMapping("/create")
     ResponseEntity<Recipe> createRecipe(@RequestBody CreateRecipeDto request){
-        return ResponseEntity.ok(recipeService.createRecipe(request));
+        return ResponseEntity.status(201).body(recipeService.createRecipe(request));
     }
 
     @PutMapping("/update")

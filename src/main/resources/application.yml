@@ -18,7 +18,7 @@ spring:
       ddl-auto: create-drop
   datasource:
     platform: postgres
-    url: jdbc:postgresql://localhost:5432/recipe_db
+    url: jdbc:postgresql://pg_container/recipe_db
     username: root
     password: root
     driverClassName: org.postgresql.Driver
