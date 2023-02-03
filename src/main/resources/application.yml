@@ -17,11 +17,13 @@ spring:
     hibernate:
       ddl-auto: create-drop
   datasource:
-    platform: postgres
     url: jdbc:postgresql://localhost:5432/recipe_db
     username: root
     password: root
     driverClassName: org.postgresql.Driver
+  sql:
+    init:
+      platform: postgres
 #  datasource:
 #    url: jdbc:postgresql://localhost:5432/recipe-db
 #    username: root

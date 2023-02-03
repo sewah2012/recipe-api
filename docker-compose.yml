@@ -1,21 +1,46 @@
 version: '3.8'
 services:
+  app:
+    image: 'recipe-api-image:latest'
+    container_name: recipe_api_container
+    build:
+      context: .
+
+    ports:
+      - "9191:8181"
+    restart: unless-stopped
+    depends_on:
+      - db
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    networks:
+      - mynetwork
   db:
     container_name: pg_container
     image: postgres
-    restart: always
+    restart: unless-stopped
     environment:
       POSTGRES_USER: root
       POSTGRES_PASSWORD: root
       POSTGRES_DB: recipe_db
     ports:
       - "5432:5432"
+    networks:
+      - mynetwork
   pgadmin:
     container_name: pgadmin4_container
     image: dpage/pgadmin4
-    restart: always
+    restart: unless-stopped
     environment:
       PGADMIN_DEFAULT_EMAIL: admin@admin.com
       PGADMIN_DEFAULT_PASSWORD: root
+    depends_on:
+      - db
     ports:
       - "5050:80"
+    networks:
+      - mynetwork
+
+networks:
+  mynetwork:
+    driver: bridge
