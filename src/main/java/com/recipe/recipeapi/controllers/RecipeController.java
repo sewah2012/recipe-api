@@ -20,8 +20,9 @@ public class RecipeController {
     private final RecipeService recipeService;
 
     @PostMapping("/create")
-    ResponseEntity<Recipe> createRecipe(@RequestBody CreateRecipeDto request){
-        return ResponseEntity.ok(recipeService.createRecipe(request));
+    Recipe createRecipe(@RequestBody CreateRecipeDto request){
+       Recipe createdRecipe =  recipeService.createRecipe(request);
+       return createdRecipe;
     }
 
     @PutMapping("/update")
